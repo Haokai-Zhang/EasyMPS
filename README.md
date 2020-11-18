@@ -4,9 +4,9 @@
 ---------------------------------
 
 Matrix product state (MPS) method is a series of powerful algorithms developed to solve a class of Hamiltonians with local interactions, based on the ansatz of “low entanglement”, or “area-law entanglement” precisely.
-
-
-
+ 
+ 
+ 
 I would like to describe vMPS in a nutshell as follows:
 
 (i) An arbitrary quantum many-body state (1-d, N sites) can be represented as a tensor on a set of certain bases. 
@@ -26,11 +26,17 @@ Another typical algorithm is the infinite time-evolving block decimation (iTEBD)
 ---------------------------------
 
 This repository is dedicated to provide an easy-to-understand implementation of MPS method. A number of ASCII sketches of tensors are presented in the comments to improve readability, such as
-
+  
 |'''|---              ---|'''|
+
 |   |      |      |      |   |
+
 |   |------H------H------|   |
+
 |   |      |      |      |   |
+
 |...|---              ---|...|
- 
+  
+  
+  
 This repository will be updated continually in the near future (11/18/2020).
