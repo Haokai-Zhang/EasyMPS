@@ -12,7 +12,7 @@ I would like to describe MPS in a nutshell as follows:
 
 - An arbitrary quantum many-body state (1-d, N sites) can be represented as a tensor on a set of certain bases. 
 - To solve the difficulty of the exponential growth of Hilbert space dimension with system size, we cut off the state tensor by performing Schmidt decomposition (equivalent to singular value decomposition, SVD) for any partition of the 1-d system and only keeping the data corresponding to the largest D Schmidt weights. 
-- In this way, we decompose the N-order state tensor as a contraction of N 3-order tensors corresponding to each site approximately, which gives us huge memory savings N*d*D^2 << d^N. Physically, we select a state most like the original one in the “low entanglement” subspace.
+- In this way, we decompose the N-order state tensor as a contraction of N 3-order tensors corresponding to each site approximately, which gives us huge memory savings N×d×D^2 << d^N. Physically, we select a state most like the original one in the “low entanglement” subspace.
 
 
 ## Specific algorithms
