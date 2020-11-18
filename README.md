@@ -7,7 +7,7 @@
 
 Matrix product state (MPS) method is a series of powerful algorithms developed to solve a class of Hamiltonians with local interactions, based on the ansatz of “low entanglement”, or “area-law entanglement” precisely. MPS is the 1-dimensional case of tensor network, which plays a central role in modern quantum physics and beyond.
 
-![Image text](https://raw.githubusercontent.com/Haokai-Zhang/EasyMPS/main/image/penrose_tensor_sketch.png)
+![Image text](https://raw.githubusercontent.com/Haokai-Zhang/EasyMPS/main/image/penrose_tensor_sketch.png =200×)
 
 I would like to describe MPS in a nutshell as follows:
 
