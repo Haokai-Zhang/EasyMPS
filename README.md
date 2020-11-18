@@ -24,7 +24,10 @@ I would like to describe MPS in a nutshell as follows:
 
 ---------------------------------
 
+## Design goal
+
 This repository is dedicated to provide an easy-to-understand implementation of MPS method. A number of ASCII sketches of tensors are presented in the comments to improve readability.
 
-  
+## Outlook
+
 This repository will be updated continually in the near future (11/18/2020).
