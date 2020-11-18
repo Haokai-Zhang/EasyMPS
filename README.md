@@ -23,20 +23,10 @@ Among a number of algorithms based on MPS, the variational MPS (vMPS) method is 
 
 Another typical algorithm is the infinite time-evolving block decimation (iTEBD), which evolves an initialized MPS iteratively by an Trotter-decomposed evolution operator.
 
+
 ---------------------------------
 
-This repository is dedicated to provide an easy-to-understand implementation of MPS method. A number of ASCII sketches of tensors are presented in the comments to improve readability, such as
-  
-|'''|---              ---|'''|
+This repository is dedicated to provide an easy-to-understand implementation of MPS method. A number of ASCII sketches of tensors are presented in the comments to improve readability.
 
-|   |      |      |      |   |
-
-|   |------H------H------|   |
-
-|   |      |      |      |   |
-
-|...|---              ---|...|
-  
-  
   
 This repository will be updated continually in the near future (11/18/2020).
