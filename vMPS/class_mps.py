@@ -8,7 +8,7 @@ Description: EasyMPS project. <class_mps.py> defines the class of matrix product
 '''
 
 from vMPS.class_site_tensor import site_tensor
-import numpy as np
+from EasyData.data_process import *
 
 class mps(object):
     '''
@@ -17,11 +17,11 @@ class mps(object):
     '''
 
     # initialize
-    def __init__(self, N, D, mpo_list):
+    def __init__(self, N, D, list_mpo):
         '''
         :param N: number of site.
         :param D: bond dimension.
-        :param mpo_list: a list of mpo corresponding to each site.
+        :param list_mpo: a list of mpo corresponding to each site.
         :return: initialized mps.
         '''
         # create mps from 2 endpoints
@@ -31,9 +31,9 @@ class mps(object):
         self.end_r.neighbor_l = self.end_l
 
         # create a list of site tensor
-        list_mps = ([site_tensor(1, D, mpo_list[0])]
-                    + [site_tensor(D, D, mpo_list[index_mpo + 1]) for index_mpo in range(N - 2)]
-                    + [site_tensor(D, 1, mpo_list[N - 1])])
+        list_mps = ([site_tensor(1, D, list_mpo[0])]
+                    + [site_tensor(D, D, list_mpo[index_mpo + 1]) for index_mpo in range(N - 2)]
+                    + [site_tensor(D, 1, list_mpo[N - 1])])
 
         # insert these state tensor into the 2 endpoints chain
         the_site_number = 0
@@ -250,7 +250,7 @@ class mps(object):
         '''
         list_measure_result = []
         for i in range(0, len(list_site)):
-            measure_result = self.MeasureCorr([opr, ],
+            measure_result = self.MeasureCorr([opr,],
                                               [list_site[i],],
                                               )
             list_measure_result.append(measure_result)
@@ -267,28 +267,27 @@ class mps(object):
             the_site_tensor = the_site_tensor.neighbor_r
         return (-2) * np.log(the_site_tensor.sv[0 : num])
 
-def IsCvg(list_E, cvg, check_len):
-    '''
-    :param list_E: list of energy.
-    :param cvg: convergence tolerance.
-    :param check_len: convergence check length.
-    :return: convergence is {True, False}.
-    '''
-    flag_cvg = True
-    if (len(list_E) < check_len):
-        return False
-    else:
-        for index_E in range(0, check_len - 1):
-            if (abs(list_E[-1 - index_E] - list_E[-1 - (index_E + 1)]) > cvg):
-                flag_cvg = False
-        return flag_cvg
+    def GetEntangleEntropy(self):
+        '''
+        :return: entanglement entropy corresponding to each bond.
+        '''
+        list_ee = []
+        the_site_tensor = self.end_l.neighbor_r
+        while (not the_site_tensor.neighbor_r.is_end):
+            # S = - \sum sv^2 * log(sv*2)
+            sv_square = np.square(the_site_tensor.sv)
+            list_ee.append(- np.dot(sv_square, np.log(sv_square)))
+            the_site_tensor = the_site_tensor.neighbor_r
+        return list_ee
 
-def BoundSort(list_A, list_B):
-    '''
-    :param list_A: list to be sorted
-    :param list_B: list to be sorted
-    :return: two lists after sorting simultaneously by list_A from smallest to largest
-    '''
-    list_A, list_B = (list(bound_element) for bound_element in zip(*sorted(zip(list_A, list_B))))
-    # zip(): pack, zip(*): unpack
-    return list_A, list_B
+    def GetListMpsData(self):
+        '''
+        :return: list of mps elements.
+        '''
+        list_mps_data = []
+        # extract mps data from left to right
+        the_site_tensor = self.end_l.neighbor_r
+        while (not the_site_tensor.is_end):
+            list_mps_data += [the_site_tensor.data_protected]
+            the_site_tensor = the_site_tensor.neighbor_r
+        return list_mps_data

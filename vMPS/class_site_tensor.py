@@ -64,6 +64,7 @@ class site_tensor(object):
             self.M_cache = None
             self.L_cache = None
             self.R_cache = None
+            # singular values of the right bond of self
             self.sv = None
             # E = <psi|H|psi> =
             #   (1)---S---S---S---S---S---S---S---S---(1)
@@ -155,7 +156,7 @@ class site_tensor(object):
 
     def ClearCacheL(self):
         '''
-        :return: None. Clear all L_cache for sites on the right by recursion.
+        :return: None. Clear all L_block for sites on the right by recursion.
         '''
         if self.is_end:
             # stop if meet the endpoint
@@ -165,7 +166,7 @@ class site_tensor(object):
 
     def ClearCacheR(self):
         '''
-        :return: None. Clear all R_cache for sites on the left by recursion.
+        :return: None. Clear all R_block for sites on the left by recursion.
         '''
         if self.is_end:
             # stop if meet the endpoint
