@@ -20,20 +20,15 @@ def GetSiteHmpo_Heisenberg(J, h, dim_spin=2):
     '''
     # generate spin operator
     Sp, Sm, Sx, Sy, Sz, Id, S0 = GenSpinOpr(dim_spin=dim_spin)
-    # H = \sum_<ij> (-J) * kronecker(S_i, S_j) + \sum_i (-h) * S^z_i
+    # H = \sum_<ij> J * kronecker(S_i, S_j) + \sum_i (-h) * S^z_i
     mpo_H_single_site_Heisenberg = np.array([[Id, S0, S0, S0, S0],
                                              [Sp, S0, S0, S0, S0],
                                              [Sm, S0, S0, S0, S0],
                                              [Sz, S0, S0, S0, S0],
-                                             [- h * Sz, - J / 2 * Sm, - J / 2 * Sp, - J * Sz, Id]])
+                                             [- h * Sz, J / 2 * Sm, J / 2 * Sp, J * Sz, Id]])
     return mpo_H_single_site_Heisenberg
     # note that it forms a 4-order tensor, not a block matrix
-    # which is equivalent with
-    # mpo_H_single_site_Heisenberg = np.float64([[Id, S0, S0, S0, S0],
-    #                                         [Sx, S0, S0, S0, S0],
-    #                                         [Sy, S0, S0, S0, S0],
-    #                                         [Sz, S0, S0, S0, S0],
-    #                                         [-h * Sz, J * Sx, J * Sy, J * Sz, Id]])
+    # exact ground state energy from Bethe ansatz = (1/4 - ln2) = -0.44314718
 
 def GetSiteHmpo_TFI(J, h, dim_spin=2):
     '''
@@ -73,27 +68,40 @@ def GetSiteHmpo_HaldanePhase(J, Uzz, Bx=0, dim_spin=3):
     return mpo_H_single_site_HaldanePhase
 
 
-def GetListHmpo(N, mpo_single_site):
+def GetListHmpo(N, mpo_single_site, if_pseudo_index=True):
     '''
     :param N: number of sites.
-    :param mpo_single_site:  single site mpo of standard form.
+    :param mpo_single_site: single site mpo of standard form.
+    :param if_pseudo_index: determine if or not to append a pseudo index to the end site mpo.
     :return: a list of mpo obtained by copying the single site mpo.
     '''
     # (open boundary condition assumed)
+    # sketch of mpo
+    #      2         1            1
+    #      |         |            |
+    #  0---H---1     H---0    0---H
+    #      |         |            |
+    #      3         2            2
 
     # mpo of the left boundary site only contains the last/first row of the standard mpo
     # (for models with nearest neighbor coupling only)
     # shape = (1) + (virtual) + (physical)
     mpo_last_row = mpo_single_site[-1].copy()
-    shape_tuple_leftmost = (1,) + mpo_last_row.shape
-    mpo_leftmost = mpo_last_row.copy().reshape(shape_tuple_leftmost)
+    if (if_pseudo_index == True):
+        shape_tuple_leftmost = (1,) + mpo_last_row.shape
+        mpo_leftmost = mpo_last_row.copy().reshape(shape_tuple_leftmost)
+    else:
+        mpo_leftmost = mpo_last_row.copy()
 
     # mpo of the right boundary site only contains the last/first row of the standard mpo
     # (for models with nearest neighbor coupling only)
     # shape = (virtual) + (1,) + (physical)
     mpo_first_column = mpo_single_site[:, 0].copy()
-    shape_tuple_rightmost = (mpo_first_column.shape[0],) + (1,) + mpo_first_column.shape[1:]
-    mpo_rightmost = mpo_first_column.copy().reshape(shape_tuple_rightmost)
+    if (if_pseudo_index == True):
+        shape_tuple_rightmost = (mpo_first_column.shape[0],) + (1,) + mpo_first_column.shape[1:]
+        mpo_rightmost = mpo_first_column.copy().reshape(shape_tuple_rightmost)
+    else:
+        mpo_rightmost = mpo_first_column.copy()
 
     # copy the single site mpo of standard form
     list_mpo_H = [mpo_leftmost]

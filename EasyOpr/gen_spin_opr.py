@@ -34,6 +34,8 @@ def GenSpinOpr(which_opr=None, dim_spin=2):
         return Sp
     elif (which_opr == 'Sm'):
         return Sm
+    elif(which_opr == 'Id'):
+        return Id
     elif (which_opr == 'real'):
         return Sz, Sp, Sm, Sx, Id
     else:
