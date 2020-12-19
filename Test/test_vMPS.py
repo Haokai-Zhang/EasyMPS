@@ -7,7 +7,7 @@ Creation Date: 2020-10-30 16:20
 Description: EasyMPS project. Run <test_vMPS.py> to test vMPS algorithm.
 '''
 
-from Test.model_inout import GetParams, PrintE
+from Test.params_inout import GetParams, PrintE
 from EasyOpr.get_mpo import *
 from vMPS.class_mps import mps
 from EasyPlot.plot_xy import *
@@ -42,9 +42,9 @@ if __name__ == "__main__":
             [list_ave_sigma_z,
              list_ave_sigma_x,
              ],
-            list_ylabel=[LatexAve('\sigma^z'),
-                         LatexAve('\sigma^x'),
-                         ],
+            list_legend_y=[LatexAve('\sigma^z'),
+                           LatexAve('\sigma^x'),
+                           ],
             name_x='x',
             name_y=LatexAve('\sigma'),
             )
