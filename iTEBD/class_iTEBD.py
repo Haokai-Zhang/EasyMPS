@@ -208,10 +208,11 @@ class mps_iTEBD(object):
                 axes=[2, 0],
             )
 
-    def IterEvo(self, cvg, max_iter):
+    def IterEvo(self, cvg, max_iter, if_print=False):
         '''
         :param cvg: convergence tolerance.
         :param max_iter: maximum times of iteration.
+        :param if_print: determine whether to print the procedure.
         :return: None. Iterative evolution.
         '''
         # take the maximum singular value as a criterion of convergence
@@ -229,31 +230,35 @@ class mps_iTEBD(object):
             max_v10 = self.v10[0]
             # if converge, break
             if (cvg_err < cvg):
-                print('cvg =', format(cvg_err, '.0e'), end='    ')
-                print('iter = %d' % index_iter)
+                if (if_print == True):
+                    print('cvg =', format(cvg_err, '.0e'), end='    ')
+                    print('iter = %d' % index_iter)
                 return
         # print convergence tolerance
-        print('cvg =', format(cvg_err, '.0e'), end='    ')
-        print('iter = %d' % max_iter)
+        if (if_print == True):
+            print('cvg =', format(cvg_err, '.0e'), end='    ')
+            print('iter = %d' % max_iter)
 
-    def LogEvo(self, max_dt, max_exponent, cvg, max_iter):
+    def LogEvo(self, max_dt, max_exponent, cvg, max_iter, if_print=False):
         '''
         :param max_dt: maximum time evolution step.
         :param max_exponent: maximum exponent of the time fineness.
         :param cvg: convergence tolerance.
         :param max_iter: maximum times of iteration.
+        :param if_print: determine whether to print the procedure.
         :return: None. Imaginary time evolution by logarithmic hierarchy.
         '''
         # for each hierarchy
         for exponent in range(0, max_exponent):
             # e.g. dt = 0.1, 0.01, 0.001, ...
             dt = max_dt * (0.1 ** exponent)
-            print('dt = %f' % dt, end='    ')
+            if (if_print == True):
+                print('dt = %f' % dt, end='    ')
             self.exp_Ht = GetExpHamPair(self.H_pair, dt)
             # iterative evolution for each dt
-            self.IterEvo(cvg, max_iter)
+            self.IterEvo(cvg, max_iter, if_print)
 
-    def GetEntangleSpec(self, num=12, bond_head_site=0):
+    def GetEntangleSpec(self, num=8, bond_head_site=0):
         '''
         :param num: the wanted number of Schmidt weights.
         :param bond_head_site: the head site of the partition bond.
