@@ -33,20 +33,22 @@ if __name__ == "__main__":
     # print the results compactly
     PrintE(E1, counter)
 
+
+
     # measure <\sigma_z>
-    list_ave_sigma_z = mps1.Measure1SiteOpr(2 * GenSpinOpr('Sz'), range(0, N))
-    print('<\sigma_z> =', list_ave_sigma_z)
+    list_ave_sigma_z_0 = mps0.Measure1SiteOpr(2 * GenSpinOpr('Sz'), range(0, N))
+    print('<\sigma_z> =', list_ave_sigma_z_0)
 
     # measure <\sigma_x>
-    list_ave_sigma_x = mps1.Measure1SiteOpr(2 * GenSpinOpr('Sx'), range(0, N))
-    print('<\sigma_x> =', list_ave_sigma_x)
+    list_ave_sigma_x_0 = mps0.Measure1SiteOpr(2 * GenSpinOpr('Sx'), range(0, N))
+    print('<\sigma_x> =', list_ave_sigma_x_0)
 
     # plot <\sigma_z> and <\sigma_x>
     PlotXYn(
         range(0, N),
         [
-            list_ave_sigma_z,
-            list_ave_sigma_x,
+            list_ave_sigma_z_0,
+            list_ave_sigma_x_0,
         ],
         list_legend_y=[
             LatexAve('\sigma^z'),
@@ -54,4 +56,30 @@ if __name__ == "__main__":
         ],
         name_x='x',
         name_y=LatexAve('\sigma'),
+        y_lim=[-1.1, 1.1],
+    )
+
+
+    # measure <\sigma_z>
+    list_ave_sigma_z_1 = mps1.Measure1SiteOpr(2 * GenSpinOpr('Sz'), range(0, N))
+    print('<\sigma_z> =', list_ave_sigma_z_1)
+
+    # measure <\sigma_x>
+    list_ave_sigma_x_1 = mps1.Measure1SiteOpr(2 * GenSpinOpr('Sx'), range(0, N))
+    print('<\sigma_x> =', list_ave_sigma_x_1)
+
+    # plot <\sigma_z> and <\sigma_x>
+    PlotXYn(
+        range(0, N),
+        [
+            list_ave_sigma_z_1,
+            list_ave_sigma_x_1,
+        ],
+        list_legend_y=[
+            LatexAve('\sigma^z'),
+            LatexAve('\sigma^x'),
+        ],
+        name_x='x',
+        name_y=LatexAve('\sigma'),
+        y_lim=[-1.1, 1.1],
     )
