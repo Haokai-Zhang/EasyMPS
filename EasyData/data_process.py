@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+'''
+Author: Hao-Kai Zhang <zhk20@tsinghua.mails.edu.cn>
+Creation Date: 2020-12-20 14:00
+Description: EasyMPS project. <data_process.py> contains functions to primary tools to process data.
+'''
+
 import numpy as np
 
 def SvdTrunc(mat, D_trunc=None, if_normalize=False):
