@@ -14,10 +14,10 @@ def GetParams():
     # TFI: H = (-J) * \sum_<i,i+1>( \sigma^z_i * \sigma^z_j + h * \sigma^x_i)
     # Heisenberg: H = \sum_<ij> (-J) * kronecker(S_i, S_j) + \sum_<i> (-h) * S_i
     # open boundary condition
-    N = 8                           # number of sites
+    N = 24                           # number of sites
     J = 1.0                         # coupling constant
-    h = 0.                          # magnetic field strength
-    D = 8                           # maximum bond dimension of mps
+    h = 0.01                          # magnetic field strength
+    D = 4                           # maximum bond dimension of mps
     sweeps = None                   # times of sweeps
     cvg = 1e-5                      # convergence tolerance
                                     # 'sweeps' xor 'cvg' = None
