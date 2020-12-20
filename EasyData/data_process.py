@@ -4,7 +4,7 @@
 '''
 Author: Hao-Kai Zhang <zhk20@tsinghua.mails.edu.cn>
 Creation Date: 2020-12-20 14:00
-Description: EasyMPS project. <data_process.py> contains functions to primary tools to process data.
+Description: EasyMPS project. <data_process.py> contains functions as primary tools to process data.
 '''
 
 import numpy as np
