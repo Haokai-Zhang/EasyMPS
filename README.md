@@ -28,7 +28,7 @@ I would like to describe MPS in a nutshell as follows:
 
 ## Specific algorithms
 
-- Among a number of algorithms based on MPS, the variational MPS (vMPS) method is the most representative one, which is exactly equivalent with the famed density matrix renormalization group (DMRG) method. The vMPS method can be summarized as: optimizing the energy expectation of MPS by quadratic variation site-by-site (or 2-site) to converge to an approximate ground state.
+- Among a number of algorithms based on MPS, the variational MPS (vMPS) method is the most representative one, which is exactly equivalent with the famed density matrix renormalization group (DMRG) method. The vMPS method can be summarized as: optimizing the energy expectation of MPS by quadratic variation site-by-site (or 2-site) to converge to an approximate ground state. See [here](https://www.zhihu.com/question/270191605/answer/1585609137) for more information.
 
 <p align="center">
 <img src="https://raw.githubusercontent.com/Haokai-Zhang/EasyMPS/main/image/vmps_sketch.png" alt="vMPS algorithm." width="600"/>
