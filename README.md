@@ -45,4 +45,8 @@ This repository is dedicated to provide an easy-to-understand implementation of 
 
 ## Outlook
 
-This repository will be updated continually in the near future (11/18/2020).
+This repository will be updated continually in the near future (12/22/2020).
+
+## Acknowledgments
+
+The author highly acknowledge the guidance from Professor Shuo Yang and her instructive course "Selected Topics in Computational Quantum Physics" in Tsinghua University.
