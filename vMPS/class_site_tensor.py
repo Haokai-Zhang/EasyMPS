@@ -521,7 +521,7 @@ class site_tensor(object):
         # evaluate the truncation error
         trunc_err = 0
         if (len(S) > D):
-            trunc_err = S[D:].sum()
+            trunc_err = (S[D:] ** 2).sum()
             U = U[:, 0:D]
             S = S[0:D]
             VT = VT[0:D, :]
