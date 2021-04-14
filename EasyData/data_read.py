@@ -9,32 +9,72 @@ Description: EasyMPS project. <data_read.py> contains functions to read data fro
 
 import linecache
 import re
+import json
 
-def ReadNumberFromText(text_path):
+def ReadJson(json_file_name):
     '''
-    :param text_path: path of text file to read.
+    :param json_file_name: the name of file to read.
+    :return: data read.
+    '''
+    with open(json_file_name + '.json', 'r') as file_data:
+        list_data_read = json.load(file_data)
+        file_data.close()
+    return list_data_read
+
+def WriteJson(list_write, json_file_name):
+    '''
+    :param list_write: data to write.
+    :param json_file_name: the name of file to write.
+    :return: None.
+    '''
+    with open(json_file_name + '.json', 'w') as file_save:
+        json_data = json.dumps(list_write, indent=4)
+        file_save.write(json_data)
+        file_save.close()
+
+def ReadNumberFromFile(file_path, line_start=0, line_end=None):
+    '''
+    :param file_path: path of text file to read.
     :return: list of data for each line.
     '''
     # count the line number
-    total_lines = 0
-    for index_line, line in enumerate(open(text_path, 'r')):
-        total_lines += 1
+    total_lines = CountLines(file_path)
     # read number from each line
-    list_num_line = []
-    for line_num in range(0, total_lines):
-        current_line = ReadStringFromText(text_path, line_num)
-        list_num_float = ReadNumberFromString(current_line)
-        list_num_line.append(list_num_float)
+    if (line_end == None):
+        line_end = total_lines
+    list_num_for_each_line = []
+    for line_num in range(line_start, line_end):
+        list_num_float = ReadNumberFromLine(file_path, line_num)
+        list_num_for_each_line.append(list_num_float)
 
-    return list_num_line
+    return list_num_for_each_line
 
-def ReadStringFromText(text_path, line_num):
+def ReadNumberFromLine(file_path, line_num):
     '''
-    :param text_path: path of text file to read.
+    :param file_path: path of the file to read.
+    :param line_num: the number of the line to read.
+    :return: the float number in the wanted line.
+    '''
+    list_num_float = ReadNumberFromString(ReadStringFromFile(file_path, line_num))
+    return list_num_float
+
+def CountLines(file_path):
+    '''
+    :param file_path: path of the file to read.
+    :return: total line number.
+    '''
+    total_lines = 0
+    for index_line, line in enumerate(open(file_path, 'r')):
+        total_lines += 1
+    return total_lines
+
+def ReadStringFromFile(file_path, line_num):
+    '''
+    :param file_path: path of the file to read.
     :param line_num: line number.
     :return: the string of corresponding line.
     '''
-    return linecache.getline(text_path, line_num).strip()
+    return linecache.getline(file_path, line_num).strip()
 
 def ReadNumberFromString(str):
     '''

@@ -21,7 +21,7 @@ def SvdTrunc(mat, D_trunc=None, if_normalize=False):
     # truncate and evaluate the truncation error
     trunc_err = 0
     if (D_trunc != None) and (len(S) > D_trunc):
-        trunc_err = S[D_trunc : ].sum()
+        trunc_err = (S[D_trunc : ] ** 2).sum()
         U = U[:, 0 : D_trunc]
         S = S[0 : D_trunc]
         VT = VT[0 : D_trunc, :]
@@ -164,6 +164,102 @@ def CombineIndex(array_A, list_index_to_combine):
     array_C = np.reshape(array_B, shape_C)
 
     return array_C
+
+def Coor2Idx(x, y, Ny):
+    return x * Ny + y
+
+def Idx2Coor(site, Ny):
+    x = site // Ny
+    y = site % Ny
+    return x, y
+
+def Idx2x(site, Ny):
+    x = site // Ny
+    return x
+
+def Idx2y(site, Ny):
+    y = site % Ny
+    return y
+
+def GenBondSquare2dNN(Nx, Ny, boundary_condition='OO'):
+    '''
+    :param Nx: 2d square lattice length
+    :param Ny: 2d square lattice size
+    :param boundary_condition: boundary condition = {'OO', 'OP', 'PO', 'PP'}
+    # 'O': open,  'P': periodic,  'OP': x-open, y-periodic
+    :return: list of 2-dimensional nearest neighbor bonds on square lattice
+    '''
+
+    # example:
+    #  1---3---5---
+    #  |   |   |
+    #  0---2---4---
+
+    list_hop = []
+    if (boundary_condition == 'OO'):
+        # 'OO': x-open, y-open
+        for x in range(0, Nx):
+            for y in range(0, Ny):
+                site_1 = Coor2Idx(x, y, Ny)
+                x_next_x = (x + 1) % Nx
+                y_next_x = y
+                x_next_y = x
+                y_next_y = (y + 1) % Ny
+                site_2_x = Coor2Idx(x_next_x, y_next_x, Ny)
+                site_2_y = Coor2Idx(x_next_y, y_next_y, Ny)
+                if (x < Nx - 1):
+                    list_hop.append([ site_1, site_2_x ])
+                if (y < Ny - 1):
+                    list_hop.append([ site_1, site_2_y ])
+    elif (boundary_condition == 'OP'):
+        # 'OP': x-open, y-periodic
+        for x in range(0, Nx):
+            for y in range(0, Ny):
+                site_1 = Coor2Idx(x, y, Ny)
+                x_next_x = (x + 1) % Nx
+                y_next_x = y
+                x_next_y = x
+                y_next_y = (y + 1) % Ny
+                site_2_x = Coor2Idx(x_next_x, y_next_x, Ny)
+                site_2_y = Coor2Idx(x_next_y, y_next_y, Ny)
+                if (x < Nx - 1):
+                    list_hop.append([ site_1, site_2_x ])
+                if (y < Ny - 1) or (Ny > 2):
+                    list_hop.append([ site_1, site_2_y ])
+    elif (boundary_condition == 'PO'):
+        # 'PO': x-periodic, y-open
+        for x in range(0, Nx):
+            for y in range(0, Ny):
+                site_1 = Coor2Idx(x, y, Ny)
+                x_next_x = (x + 1) % Nx
+                y_next_x = y
+                x_next_y = x
+                y_next_y = (y + 1) % Ny
+                site_2_x = Coor2Idx(x_next_x, y_next_x, Ny)
+                site_2_y = Coor2Idx(x_next_y, y_next_y, Ny)
+                if (x < Nx - 1) or (Nx > 2):
+                    list_hop.append([ site_1, site_2_x ])
+                if (y < Ny - 1):
+                    list_hop.append([ site_1, site_2_y ])
+    elif (boundary_condition == 'PP'):
+        # 'PO': x-periodic, y-open
+        for x in range(0, Nx):
+            for y in range(0, Ny):
+                site_1 = Coor2Idx(x, y, Ny)
+                x_next_x = (x + 1) % Nx
+                y_next_x = y
+                x_next_y = x
+                y_next_y = (y + 1) % Ny
+                site_2_x = Coor2Idx(x_next_x, y_next_x, Ny)
+                site_2_y = Coor2Idx(x_next_y, y_next_y, Ny)
+                if (x < Nx - 1) or (Nx > 2):
+                    list_hop.append([ site_1, site_2_x ])
+                if (y < Ny - 1) or (Ny > 2):
+                    list_hop.append([ site_1, site_2_y ])
+    else:
+        print('-----Error: boundary_condition = OO/OP/PO/PP !-----')
+        exit()
+    return list_hop
 
 def BoundSort(list_A, list_B):
     '''
