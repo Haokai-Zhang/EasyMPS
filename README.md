@@ -1,6 +1,45 @@
 # EasyMPS
 "A pedagogical realization of MPS method."
 
+## Small Tutorial
+
+```python
+from AutoMPO.class_fsa import fsa
+from AutoMPO.class_named_data import named_data
+from AutoMPO.opr_pool import GenSpinOpr
+
+from vMPS.class_mps import mps
+
+if __name__ == "__main__":
+    # model parameter
+    N = 5
+    J = 1.0
+    g = 0.5
+    # define operator with a string as name
+    Sz = named_data('Sz', GenSpinOpr('Sz'))
+    Sx = named_data('Sx', GenSpinOpr('Sx'))
+    # construct finite state automata
+    fsa = fsa(N)
+    for i in range(0, N):
+        # add each term in the Hamiltonian
+        if (i < N - 1):
+            fsa.Add(J, [Sz, Sz], [i, i + 1])
+        fsa.Add(g, [Sx], [i])
+    # use the constructed fsa to generate MPO
+    list_mpo = fsa.GenMPO()
+    # visualize MPO represented by operator symbols
+    fsa.PrintSymbolMPO()
+	
+    # vMPS/DMRG
+    D = 4
+    # construct mps
+    mps0 = mps(N, D, list_mpo)
+    # variation
+    E0, counter = mps0.vMPS(cvg=1e-9, if_print=True, update_sites=2)
+```
+
+
+
 ---------------------------------
 
 ## What is MPS?
@@ -36,7 +75,6 @@ I would like to describe MPS in a nutshell as follows:
 
 - Another typical algorithm is the infinite time-evolving block decimation (iTEBD), which evolves an initialized MPS iteratively by an Trotter-decomposed evolution operator.
 
-
 ---------------------------------
 
 ## Design goal
@@ -45,7 +83,7 @@ This repository is dedicated to provide an easy-to-understand implementation of 
 
 ## Outlook
 
-This repository will be updated continually in the near future (12/22/2020).
+This repository will be updated continually in the near future (07/05/2021).
 
 ## Acknowledgments
 
