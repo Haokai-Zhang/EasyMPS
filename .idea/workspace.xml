@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="67ec4594-8a66-4b11-82a4-d99883aac95f" name="Default" comment="" />
+    <list default="true" id="67ec4594-8a66-4b11-82a4-d99883aac95f" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -66,7 +68,7 @@
       <file leaf-file-name="class_fsa.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AutoMPO/class_fsa.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="22505">
+            <state relative-caret-position="0">
               <caret line="645" column="54" lean-forward="false" selection-start-line="645" selection-start-column="54" selection-end-line="645" selection-end-column="54" />
               <folding>
                 <element signature="e#267#285#0" expanded="true" />
@@ -222,7 +224,7 @@
     <detection-done>true</detection-done>
     <sorting>DEFINITION_ORDER</sorting>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="1911" />
     <option name="y" value="-1085" />
     <option name="width" value="3218" />
@@ -301,6 +303,9 @@
     <property name="settings.editor.selected.configurable" value="PyScientificConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\ZHK\Desktop\S\git-code\EasyMPS" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\ZHK\Desktop\S\2020-2021_1\iDMRG\EasyMPS\Test\test_sub" />
       <recent name="C:\Users\ZHK\Desktop\S\2020-2021_1\iDMRG\EasyMPS\Test" />
@@ -460,7 +465,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1911" y="-1085" width="3218" height="1768" extended-state="7" />
+    <frame x="1911" y="-1085" width="3218" height="1768" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32974002" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -527,8 +532,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/mps.py" />
-    <entry file="file://$PROJECT_DIR$/paulimat.py" />
     <entry file="file://$PROJECT_DIR$/ising.py" />
     <entry file="file://$PROJECT_DIR$/heisenberg.py" />
     <entry file="file://$PROJECT_DIR$/Hamiltonian" />
@@ -760,11 +763,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AutoMPO/class_fsa.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="22505">
+        <state relative-caret-position="0">
           <caret line="645" column="54" lean-forward="false" selection-start-line="645" selection-start-column="54" selection-end-line="645" selection-end-column="54" />
           <folding>
             <element signature="e#267#285#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
