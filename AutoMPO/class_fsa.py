@@ -188,6 +188,10 @@ class fsa(object):
         :param print_form: the form of print = {None, 'phys', 'all'}
         :return: None
         '''
+        # check if coef == 0
+        if IsClose(coef, 0):
+            return None
+
         # operator configuration:
         # inst_opr s --- phys_opr s--- inst_opr s -...- phys_opr s --- inst_opr s
         if (list_named_inst_opr == None):
